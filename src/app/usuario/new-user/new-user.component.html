@@ -1,0 +1,68 @@
+<form [formGroup]="myformNewUser" action="" (ngSubmit)="guardarUsuario()">
+    <div class="flex flex-column col-6 col-offset-3">
+            <span class="text-lg mb-4">Login</span>
+        <mat-form-field>
+            <mat-label>login</mat-label>
+            <input type="text" formControlName="login" matInput placeholder="Nombre del Usuario">
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input type="password" formControlName="password" matInput placeholder="Password del Usuario">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input type="text" formControlName="password" matInput placeholder="Escribe tu nombre">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Cliente</mat-label>
+            <input type="number" formControlName="cliente" matInput placeholder="Escribe el cliente">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input type="email" formControlName="email" matInput placeholder="Escribe tu email">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Fecha alta</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Fecha baja</mat-label>
+            <input matInput [matDatepicker]="pickerFb">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="pickerFb"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFb></mat-datepicker>
+          </mat-form-field>
+
+          <h4>Basic mat-select</h4>
+            <mat-form-field>
+            <mat-label>Favorite food</mat-label>
+            <mat-select>
+                @for (st of status; track st) {
+                <mat-option [value]="st.status">{{st.valor}}</mat-option>
+                }
+            </mat-select>
+            </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input type="email" formControlName="email" matInput placeholder="Escribe tu email">
+        </mat-form-field>
+    
+        <button mat-button mat-flat-button color="primary">
+            <mat-icon>save</mat-icon>
+            Ingresar
+        </button>
+        <div class="flex justify-content-end mt-5">
+            <a routerLink="/auth">Ya tienes cuenta?</a>
+        </div>  
+    </div>
+</form>
