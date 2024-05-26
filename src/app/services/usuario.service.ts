@@ -10,13 +10,14 @@ import Swal from 'sweetalert2';
 
 export class UsuarioService {
   private user?: Usuario
-  urlEndPoin = "http://localhost:8081/api/login"
+  urlEndPointLogin = "http://localhost:8081/api/login"
+  urlEndPointUser = "http://localhost:8081/api/usuarios"
   private httpHeaders = new HttpHeaders({'Content-type':'application/json'})
   
   constructor(private httpClient: HttpClient) { }
 
   getUsuario(usuario: Usuario): Observable<Usuario>{
-    return this.httpClient.post<Usuario>(this.urlEndPoin, usuario, {headers: this.httpHeaders}).pipe(
+    return this.httpClient.post<Usuario>(this.urlEndPointLogin, usuario, {headers: this.httpHeaders}).pipe(
       tap (user =>  this.user = user),
         
       tap (user => localStorage.setItem('token', user.login.toString() )),
@@ -30,6 +31,15 @@ export class UsuarioService {
         return throwError(() => e);
       })
     )
+  }
+
+  saveUsuario(usuario: Usuario): Observable<Usuario>{
+    return this.httpClient.post<Usuario>(this.urlEndPointUser, usuario, {headers: this.httpHeaders})
+    /*.pipe(
+      tap(()=>{
+        this.RequiredRefresh.next();
+      })
+    );*/
   }
 
   get currentUser(): Usuario | undefined {

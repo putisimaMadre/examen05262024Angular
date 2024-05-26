@@ -13,14 +13,19 @@ export class MenuComponent implements OnInit {
   ver: boolean = false;
   
   ngOnInit(): void {
-    /*if(this.usuarioService.currentUser == undefined){
+    if(this.usuarioService.currentUser == undefined){
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Aun no estas autorizado"
       });
       this.router.navigate(['./login'])
-    }*/
+    }
+  }
+
+  sesion(): void{
+    localStorage.removeItem("token");
+    this.router.navigate(['./login'])
   }
 
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UsuarioService } from '../../services/usuario.service';
+import { Router } from '@angular/router';
 
 interface Status {
   status: string;
@@ -21,27 +23,50 @@ export class NewUserComponent {
   ];
 
 public myformNewUser: FormGroup = this.fb.group({
-    login: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-    nombre: ['', [Validators.required]],
-    cliente: ['', [Validators.required]],
-    email: ['', [Validators.required]],
-    fechaalta: ['', [Validators.required]],
-    fechabaja: ['', [Validators.required]],
-    status: ['', [Validators.required]],
-    intentos: ['', [Validators.required]],
-    fecharevocado: ['', [Validators.required]],
-    fecha_vigencia: ['', [Validators.required]],
-    no_acceso: ['', [Validators.required]],
-    apellido_paterno: ['', [Validators.required]],
-    apellido_materno: ['', [Validators.required]],
-    area: ['', [Validators.required]],
-    fechamodificacion: ['', [Validators.required]],
+    login: ['', [Validators.required, Validators.minLength(3)]],
+    password: ['', [Validators.required, Validators.minLength(3)]],
+    nombre: ['', [Validators.required, Validators.minLength(3)]],
+    cliente: ['', [Validators.required, Validators.minLength(3)]],
+    email: [''],
+    fechaalta: ['', ],
+    fechabaja: [''],
+    status: [''],
+    intentos: [''],
+    fecharevocado: [''],
+    fechaVigencia: [''],
+    noAcceso: [''],
+    apellidoPaterno: [''],
+    apellidoMaterno: [''],
+    area: [''],
+    fechamodificacion: [''],
 })
 
-  constructor(private fb: FormBuilder){}
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+    private router: Router
+  ){}
 
   guardarUsuario(): void{
-    
+    console.log(this.myformNewUser.value)
+    if(this.myformNewUser.invalid) return;
+    if(this.myformNewUser.value['fechaalta'] == ""){
+      this.myformNewUser.value['fechaalta'] = new Date();
+      console.log(this.myformNewUser.value['fechaalta'])
+    }
+    if(this.myformNewUser.value['fechamodificacion'] == ""){
+      this.myformNewUser.value['fechamodificacion'] = new Date();
+      console.log(this.myformNewUser.value['fechamodificacion'])
+    }
+    if(this.myformNewUser.value['fechaVigencia'] == ""){
+      this.myformNewUser.value['fechaVigencia'] = new Date();
+      console.log(this.myformNewUser.value['fechaVigencia'])
+    }
+    this.usuarioService.saveUsuario(this.myformNewUser.value).subscribe(() => this.router.navigate(['/menu']))
   }
+
+  /*checkUser(): void{
+    if(this.myForm.invalid) return;
+    this.usuarioService.getUsuario(this.myForm.value).subscribe(valor => {
+      this.router.navigate(['./menu']);
+    })
+  }*/
 }

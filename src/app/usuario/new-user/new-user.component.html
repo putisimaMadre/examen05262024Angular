@@ -13,7 +13,7 @@
 
         <mat-form-field>
             <mat-label>Nombre</mat-label>
-            <input type="text" formControlName="password" matInput placeholder="Escribe tu nombre">
+            <input type="text" formControlName="nombre" matInput placeholder="Escribe tu nombre">
         </mat-form-field>
 
         <mat-form-field>
@@ -22,47 +22,77 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>E-mail</mat-label>
+            <mat-label>E-mail (Opcional)</mat-label>
             <input type="email" formControlName="email" matInput placeholder="Escribe tu email">
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Fecha alta</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-label>Fecha alta (Opcional)</mat-label>
+            <input formControlName="fechaalta" matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY Opcional</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Fecha baja</mat-label>
-            <input matInput [matDatepicker]="pickerFb">
+            <mat-label>Fecha baja (Opcional)</mat-label>
+            <input formControlName="fechabaja" matInput [matDatepicker]="pickerFb">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="pickerFb"></mat-datepicker-toggle>
             <mat-datepicker #pickerFb></mat-datepicker>
           </mat-form-field>
 
-          <h4>Basic mat-select</h4>
             <mat-form-field>
-            <mat-label>Favorite food</mat-label>
-            <mat-select>
+            <mat-label>Status (Opcional)</mat-label>
+            <mat-select formControlName="status">
                 @for (st of status; track st) {
                 <mat-option [value]="st.status">{{st.valor}}</mat-option>
                 }
             </mat-select>
             </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>E-mail</mat-label>
-            <input type="email" formControlName="email" matInput placeholder="Escribe tu email">
-        </mat-form-field>
+            <mat-form-field>
+                <mat-label>Fecha de rebocado (Opcional)</mat-label>
+                <input formControlName="fecharevocado" matInput [matDatepicker]="pickerFr">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerFr"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFr></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Fecha de vigencia (Opcional)</mat-label>
+                <input formControlName="fechaVigencia" matInput [matDatepicker]="pickerFv">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerFv"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFv></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Apellido paterno (Opcional)</mat-label>
+                <input type="text" formControlName="apellidoPaterno" matInput placeholder="Escribe tu apellido paterno">
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>Apellido materno (Opcional)</mat-label>
+                <input type="text" formControlName="apellidoMaterno" matInput placeholder="Escribe tu apellido materno">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Area (Opcional)</mat-label>
+                <input type="number" formControlName="area" matInput placeholder="Escribe el area">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Fecha de modificacion</mat-label>
+                <input formControlName="fechamodificacion" matInput [matDatepicker]="pickerFm">
+                <mat-hint>MM/DD/YYYY Opcional</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerFm"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFm></mat-datepicker>
+              </mat-form-field>
     
         <button mat-button mat-flat-button color="primary">
             <mat-icon>save</mat-icon>
-            Ingresar
-        </button>
-        <div class="flex justify-content-end mt-5">
-            <a routerLink="/auth">Ya tienes cuenta?</a>
-        </div>  
+            Guardar
+        </button> 
     </div>
 </form>
