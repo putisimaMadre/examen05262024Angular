@@ -2,8 +2,7 @@
     <button mat-button [matMenuTriggerFor]="menu">Gestión de Usuarios</button>
         <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/usuario/nuevo">Alta de Usuario</button>
-        <button mat-menu-item routerLink="/usuario/list">Modificacion y Eliminacion de Usuario</button>
         </mat-menu>
-    <button mat-button>Tablero de Usuarios</button>
+    <button mat-button routerLink="/tablero">Tablero de Usuarios</button>
     <button mat-button (click)="sesion()">Cerrar sesión</button>
   </mat-toolbar>

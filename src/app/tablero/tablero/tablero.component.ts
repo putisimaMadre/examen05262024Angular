@@ -77,6 +77,10 @@ export class TableroComponent implements OnInit {
     this.dataSource.filterPredicate = (data, filter) => { const filterArray = filter.split('$'); return (!filterArray[0] || data.nombre.toLowerCase().indexOf(filterArray[0].trim().toLowerCase()) > -1) && (!filterArray[1] || data.login.indexOf(filterArray[1]) > -1) ; };
   }
 
- 
+
+  deleteUsuario(usuario: Usuario): void{
+    console.log("llegando")
+    this.usuarioService.deleteUsuario(usuario.login).subscribe(response => this.usuarios = this.usuarios.filter(usr => usr !== usuario))
+  }
   
 }

@@ -14,29 +14,7 @@
       </button>
     </div>
 </div>
-<!--<form [formGroup]="myformTablero" action="">-->
-<mat-form-field>
 
-    <mat-label>Nombre</mat-label>
-    <input matInput (keyup)="busqueda($event)" placeholder="" #input>
-</mat-form-field>
-
-<mat-form-field>
-    <mat-label>Fecha alta inicial</mat-label>
-    <input  matInput [matDatepicker]="picker">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Fecha alta final</mat-label>
-    <input matInput [matDatepicker]="pickerF">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="pickerF"></mat-datepicker-toggle>
-    <mat-datepicker #pickerF></mat-datepicker>
-  </mat-form-field>
-<!--</form>-->
 
 
 <mat-form-field>
@@ -61,7 +39,7 @@
     <!-- Weight Column -->
     <ng-container matColumnDef="fechaAlta">
       <th mat-header-cell *matHeaderCellDef> Fecha de alta </th>
-      <td mat-cell *matCellDef="let element"> {{element.fechaAlta}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.fechaalta}} </td>
     </ng-container>
   
     <!-- Symbol Column -->
@@ -73,7 +51,7 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="accion">
         <th mat-header-cell *matHeaderCellDef> Accion </th>
-        <td mat-cell *matCellDef="let element"> <a href=""><b>Editar</b></a>/<a href=""><b>Baja</b></a> </td>
+        <td mat-cell *matCellDef="let element"> <a routerLink="/usuario/nuevo/{{element.login}}"><b>Editar</b></a>/<button (click)="deleteUsuario(element)"><b>Baja</b></button> </td>
       </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

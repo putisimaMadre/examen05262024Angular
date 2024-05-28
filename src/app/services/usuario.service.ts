@@ -22,6 +22,10 @@ export class UsuarioService {
     return this.httpClient.get<Usuario[]>(this.urlEndPointUser);
   }
 
+  getUsuarioEditar(login: string): Observable<Usuario>{
+    return this.httpClient.get<Usuario>(this.urlEndPointUser+'/'+login)
+  }
+
   getUsuario(usuario: Usuario): Observable<Usuario>{
     return this.httpClient.post<Usuario>(this.urlEndPointLogin, usuario, {headers: this.httpHeaders}).pipe(
       tap (user =>  this.user = user),
@@ -53,7 +57,14 @@ export class UsuarioService {
     return this.httpClient.get<Usuario[]>(this.urlEndPointBusquedaLetra+'/'+letra)   
   }
 
-  /*getAlumno(id: any): Observable<Alumno>{
-    return this.httpClient.get<Alumno>(this.urlEndPoint+'/'+id)
-  }*/
+  updateUsuarioS(usuario: any): Observable<Usuario>{
+    /*console.log("llegando")
+    console.log(usuario)
+    console.log(this.urlEndPointUser+'/'+usuario.login)*/
+    return this.httpClient.put<Usuario>(this.urlEndPointUser+'/'+usuario.login, usuario, {headers:this.httpHeaders})
+  }
+
+  deleteUsuario(login: string): Observable<Usuario>{
+    return this.httpClient.delete<Usuario>(this.urlEndPointUser+'/'+login, {headers:this.httpHeaders})
+  }
 }
