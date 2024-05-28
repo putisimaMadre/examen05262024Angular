@@ -13,7 +13,7 @@ export class MenuComponent implements OnInit {
   ver: boolean = false;
   
   ngOnInit(): void {
-    if(this.usuarioService.currentUser == undefined){
+    if(this.usuarioService.currentUser === undefined){
       Swal.fire({
         icon: "error",
         title: "Oops...",

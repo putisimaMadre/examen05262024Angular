@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path:'menu',
     loadChildren: () => import('./menu/menu.module').then(m => m.MenuModule)
+  },
+  {
+    path:'tablero',
+    loadChildren: () => import('./tablero/tablero.module').then(m => m.TableroModule)
   }
 ];
 

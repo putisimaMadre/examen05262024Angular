@@ -1,0 +1,86 @@
+<div class="flex flex-column col-6 col-offset-3">
+    <div class="example-button-row">
+      <button mat-fab extended color="primary" (click)="busquedaLetra('A')">
+        <mat-icon>favorite</mat-icon>
+        Activos
+      </button>
+      <button mat-fab extended color="accent" (click)="busquedaLetra('I')">
+        <mat-icon>favorite</mat-icon>
+        Inactivos
+      </button>
+      <button mat-fab extended color="warn" (click)="busquedaLetra('R')">
+        <mat-icon>favorite</mat-icon>
+        Revocados
+      </button>
+    </div>
+</div>
+<!--<form [formGroup]="myformTablero" action="">-->
+<mat-form-field>
+
+    <mat-label>Nombre</mat-label>
+    <input matInput (keyup)="busqueda($event)" placeholder="" #input>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Fecha alta inicial</mat-label>
+    <input  matInput [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Fecha alta final</mat-label>
+    <input matInput [matDatepicker]="pickerF">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="pickerF"></mat-datepicker-toggle>
+    <mat-datepicker #pickerF></mat-datepicker>
+  </mat-form-field>
+<!--</form>-->
+
+
+<mat-form-field>
+    <mat-label>Filtro General de la tabla</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+  </mat-form-field>
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="login">
+      <th mat-header-cell *matHeaderCellDef> Login </th>
+      <td mat-cell *matCellDef="let element"> {{element.login}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="fechaAlta">
+      <th mat-header-cell *matHeaderCellDef> Fecha de alta </th>
+      <td mat-cell *matCellDef="let element"> {{element.fechaAlta}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="accion">
+        <th mat-header-cell *matHeaderCellDef> Accion </th>
+        <td mat-cell *matCellDef="let element"> <a href=""><b>Editar</b></a>/<a href=""><b>Baja</b></a> </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>

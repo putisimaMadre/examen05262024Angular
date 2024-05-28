@@ -16,11 +16,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
   declarations: [],
   exports: [
+    MatTableModule,
     MatDatepickerModule,
     MatAutocompleteModule,
     MatButtonModule,
