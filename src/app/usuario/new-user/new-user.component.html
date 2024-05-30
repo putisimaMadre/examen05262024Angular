@@ -1,6 +1,7 @@
 <form [formGroup]="myformNewUser">
     <div class="flex flex-column col-6 col-offset-3">
-            <span class="text-lg mb-4">Login</span>
+        <span class="text-lg mb-4">Login</span>
+        
         <mat-form-field>
             <mat-label>login</mat-label>
             <input type="text" formControlName="login" [value]="usuario?.login" matInput placeholder="Nombre del Usuario">
@@ -45,6 +46,7 @@
             <mat-form-field>
             <mat-label>Status (Opcional)</mat-label>
             <mat-select formControlName="status" [value]="usuario?.status">
+                
                 @for (st of status; track st) {
                 <mat-option [value]="st.status">{{st.valor}}</mat-option>
                 }

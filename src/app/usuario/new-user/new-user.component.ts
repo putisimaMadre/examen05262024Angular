@@ -16,7 +16,7 @@ interface Status {
 })
 export class NewUserComponent implements OnInit{
   selectedValue: string = "";
-  usuario?: Usuario; 
+  usuario!: Usuario;
 
   status: Status[] = [
     {status: 'A', valor: 'Activos'},
@@ -46,6 +46,7 @@ public myformNewUser: FormGroup = this.fb.group({
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
     private router: Router, private activedRouter: ActivatedRoute
   ){}
+
   ngOnInit(): void {
     this.cargarCliente()
     //this.loadEditData()
@@ -76,57 +77,30 @@ public myformNewUser: FormGroup = this.fb.group({
         this.usuarioService.getUsuarioEditar(id).subscribe(
           usuario => {
             this.usuario = usuario
+            this.myformNewUser.setValue({
+              login: this.usuario.login,
+              password: this.usuario.password,
+              nombre: this.usuario.nombre,
+              cliente: this.usuario.cliente,
+              email: this.usuario.email,
+              fechaalta: this.usuario.fechaalta,
+              fechabaja: this.usuario.fechabaja,
+              status: this.usuario.status,
+              intentos: this.usuario.intentos,
+              fecharevocado: this.usuario.fecharevocado,
+              fechaVigencia: this.usuario.fechaVigencia,
+              noAcceso: this.usuario.noAcceso,
+              apellidoPaterno: this.usuario.apellidoPaterno,
+              apellidoMaterno: this.usuario.apellidoMaterno,
+              area: this.usuario.area,
+              fechamodificacion: this.usuario.fechamodificacion,
+            })
           })
       }
     })
   }
 
-  loadEditData(): void{
-    this.myformNewUser.patchValue({
-      login: this.usuario?.login,
-      password: this.usuario?.password,
-      nombre: this.usuario?.nombre,
-      cliente: this.usuario?.cliente,
-      email: this.usuario?.email,
-      fechaalta: this.usuario?.fechaalta,
-      fechabaja: this.usuario?.fechabaja,
-      status: this.usuario?.status,
-      intentos: this.usuario?.intentos,
-      fecharevocado: this.usuario?.fecharevocado,
-      fechaVigencia: this.usuario?.fechaVigencia,
-      noAcceso: this.usuario?.noAcceso,
-      apellidoPaterno: this.usuario?.apellidoPaterno,
-      apellidoMaterno: this.usuario?.apellidoMaterno,
-      area: this.usuario?.area,
-      fechamodificacion: this.usuario?.fechamodificacion,
-    })
-  }
-
-  /*loadEditData(id: any) {
-    this.rasgoService.getRasgo(id).subscribe(item => {
-    this.editdata = item;
-    this.formRasgo.setValue({
-      id: this.editdata.id,
-      rasgo: this.editdata.rasgo,
-      porcentaje: this.editdata.porcentaje,
-      idAsignatura: this.editdata.idAsignatura,
-      status: this.editdata.status
-    })
-  });
-}*/
-
   updateUsuario(): void{
-    this.loadEditData()
-    //this.usuario = this.myformNewUser.value
-    console.log(this.myformNewUser.value) //este cambia
-    //console.log(this.usuario)
-    this.usuarioService.updateUsuarioS(this.usuario).subscribe(() => this.router.navigate(['/tablero']))
+    this.usuarioService.updateUsuarioS(this.myformNewUser.value).subscribe(() => this.router.navigate(['/tablero']))
   }
-
-  /*checkUser(): void{
-    if(this.myForm.invalid) return;
-    this.usuarioService.getUsuario(this.myForm.value).subscribe(valor => {
-      this.router.navigate(['./menu']);
-    })
-  }*/
 }
