@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, Subject, catchError, tap, throwError } from 'rxjs';
 import { Usuario } from '../models/usuario';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Swal from 'sweetalert2';
@@ -13,6 +13,11 @@ export class UsuarioService {
   urlEndPointLogin = "http://localhost:8081/api/login"
   urlEndPointUser = "http://localhost:8081/api/usuarios"
   urlEndPointBusquedaLetra = "http://localhost:8081/api/busquedaLetra"
+
+  private _refreshrequired = new Subject<void>();
+  get RequiredRefresh(){
+    return this._refreshrequired;
+  }
 
   private httpHeaders = new HttpHeaders({'Content-type':'application/json'})
   
@@ -47,24 +52,24 @@ export class UsuarioService {
   }
 
   get currentUser(): Usuario | undefined {
-    console.log(this.user)
     if (!this.user) return undefined
     return  structuredClone (this.user)
   }
-
 
   busquedaLetra(letra: string): Observable<Usuario[]>{
     return this.httpClient.get<Usuario[]>(this.urlEndPointBusquedaLetra+'/'+letra)   
   }
 
   updateUsuarioS(usuario: any): Observable<Usuario>{
-    /*console.log("llegando")
-    console.log(usuario)
-    console.log(this.urlEndPointUser+'/'+usuario.login)*/
     return this.httpClient.put<Usuario>(this.urlEndPointUser+'/'+usuario.login, usuario, {headers:this.httpHeaders})
   }
 
   deleteUsuario(login: string): Observable<Usuario>{
     return this.httpClient.delete<Usuario>(this.urlEndPointUser+'/'+login, {headers:this.httpHeaders})
+    .pipe(
+      tap(()=>{
+        this.RequiredRefresh.next();
+      })
+    );
   }
 }

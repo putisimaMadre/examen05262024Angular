@@ -7,6 +7,7 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import { MenuModule } from '../menu/menu.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {provideNativeDateAdapter} from '@angular/material/core';
     UsuarioRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MenuModule
   ],
   providers:[
     provideNativeDateAdapter()

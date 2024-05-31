@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { MatSort } from '@angular/material/sort';
 
 /*export interface PeriodicElement {
   name: string;
@@ -43,13 +46,27 @@ export class TableroComponent implements OnInit {
     fechafinal: [''],
 })*/
   
-  constructor(private usuarioService: UsuarioService){}
+  @ViewChild(MatPaginator) paginator !: MatPaginator;
+  @ViewChild(MatSort) sort !: MatSort;
+  constructor(private usuarioService: UsuarioService, private router: Router){}
   
   ngOnInit(): void {
     this.usuarioService.getUsuarios().subscribe(usuario => {
       this.usuarios = usuario
       this.dataSource = new MatTableDataSource(this.usuarios)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
   })
+
+  /*
+    this.alumnoService.getAlumnos().subscribe(result => {
+      this.empdata = result;
+
+      this.dataSource = new MatTableDataSource<Alumno>(this.empdata)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+    */
 
   }
 
@@ -79,8 +96,21 @@ export class TableroComponent implements OnInit {
 
 
   deleteUsuario(usuario: Usuario): void{
-    console.log("llegando")
-    this.usuarioService.deleteUsuario(usuario.login).subscribe(response => this.usuarios = this.usuarios.filter(usr => usr !== usuario))
+    this.usuarioService.deleteUsuario(usuario.login).subscribe(response => {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Alumno Eliminado correctamente',
+        showConfirmButton: false,
+        timer: 2000
+      })
+
+        this.usuarioService.getUsuarios().subscribe(usuarios => {
+          this.dataSource = new MatTableDataSource(usuarios)
+        })
+      
+      this.router.navigate(['/tablero'])
+    })
   }
   
 }

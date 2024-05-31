@@ -1,8 +1,9 @@
+<app-menu></app-menu>
 <form [formGroup]="myformNewUser">
     <div class="flex flex-column col-6 col-offset-3">
         <span class="text-lg mb-4">Login</span>
         
-        <mat-form-field>
+        <mat-form-field *ngIf="!usuario?.login">
             <mat-label>login</mat-label>
             <input type="text" formControlName="login" [value]="usuario?.login" matInput placeholder="Nombre del Usuario">
         </mat-form-field>

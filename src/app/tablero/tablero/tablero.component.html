@@ -1,15 +1,16 @@
+<app-menu></app-menu>
 <div class="flex flex-column col-6 col-offset-3">
     <div class="example-button-row">
       <button mat-fab extended color="primary" (click)="busquedaLetra('A')">
-        <mat-icon>favorite</mat-icon>
+        <mat-icon>done</mat-icon>
         Activos
       </button>
       <button mat-fab extended color="accent" (click)="busquedaLetra('I')">
-        <mat-icon>favorite</mat-icon>
+        <mat-icon>keyboard_double_arrow_down</mat-icon>
         Inactivos
       </button>
       <button mat-fab extended color="warn" (click)="busquedaLetra('R')">
-        <mat-icon>favorite</mat-icon>
+        <mat-icon>undo</mat-icon>
         Revocados
       </button>
     </div>
@@ -51,7 +52,7 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="accion">
         <th mat-header-cell *matHeaderCellDef> Accion </th>
-        <td mat-cell *matCellDef="let element"> <a routerLink="/usuario/nuevo/{{element.login}}"><b>Editar</b></a>/<button (click)="deleteUsuario(element)"><b>Baja</b></button> </td>
+        <td mat-cell *matCellDef="let element"> <button routerLink="/usuario/nuevo/{{element.login}}"><b>Editar</b></button>/<button (click)="deleteUsuario(element)"><b>Baja</b></button></td>
       </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

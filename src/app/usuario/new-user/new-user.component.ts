@@ -49,23 +49,19 @@ public myformNewUser: FormGroup = this.fb.group({
 
   ngOnInit(): void {
     this.cargarCliente()
-    //this.loadEditData()
   }
 
+
   guardarUsuario(): void{
-    console.log(this.myformNewUser.value)
     if(this.myformNewUser.invalid) return;
     if(this.myformNewUser.value['fechaalta'] == ""){
       this.myformNewUser.value['fechaalta'] = new Date();
-      console.log(this.myformNewUser.value['fechaalta'])
     }
     if(this.myformNewUser.value['fechamodificacion'] == ""){
       this.myformNewUser.value['fechamodificacion'] = new Date();
-      console.log(this.myformNewUser.value['fechamodificacion'])
     }
     if(this.myformNewUser.value['fechaVigencia'] == ""){
       this.myformNewUser.value['fechaVigencia'] = new Date();
-      console.log(this.myformNewUser.value['fechaVigencia'])
     }
     this.usuarioService.saveUsuario(this.myformNewUser.value).subscribe(() => this.router.navigate(['/menu']))
   }

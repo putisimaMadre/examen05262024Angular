@@ -14,6 +14,9 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     MenuRoutingModule,
     MaterialModule
+  ],
+  exports: [
+    MenuComponent
   ]
 })
 export class MenuModule { }
